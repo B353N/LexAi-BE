@@ -41,7 +41,7 @@ defineProps({
                                 Табло за управление
                             </Link>
                             <Link
-                                :href="route('chat')"
+                                :href="route('chat.index')"
                                 class="rounded-md px-4 py-2 text-gray-600 transition duration-300 ease-in-out hover:text-indigo-500 dark:text-gray-400 dark:hover:text-indigo-400"
                             >
                                 Чат

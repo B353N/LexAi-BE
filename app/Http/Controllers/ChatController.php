@@ -10,6 +10,8 @@ use Prism\Prism\Enums\Provider;
 use Prism\Prism\Prism;
 use Prism\Prism\ValueObjects\Messages\AssistantMessage;
 use Prism\Prism\ValueObjects\Messages\UserMessage;
+use Illuminate\Support\Facades\File;
+use Prism\Prism\ValueObjects\Messages\Support\Document;
 
 class ChatController extends Controller
 {
@@ -60,6 +62,10 @@ class ChatController extends Controller
             $chatSession->update(['title' => substr($request->input('message'), 0, 50)]);
         }
 
+        $systemPrompt = 'Ти си правен асистент, специализиран в българското законодателство за малки и средни предприятия. Отговаряй като професионален юрисконсулт. Използвай предоставения документ като основен източник на правна информация.';
+        $legalDocumentPath = storage_path('app/legal/constitution.md');
+        $legalDocumentContent = File::get($legalDocumentPath);
+
         $messages = $chatSession->messages()->get()->map(function ($message) {
             if ($message->sender === 'user') {
                 return new UserMessage($message->message);
@@ -67,6 +73,10 @@ class ChatController extends Controller
 
             return new AssistantMessage($message->message);
         })->all();
+
+        array_unshift($messages, new UserMessage($systemPrompt, [
+            Document::fromText($legalDocumentContent, 'constitution.md'),
+        ]));
 
         $response = Prism::text()
             ->using(Provider::Gemini, 'gemini-1.5-flash-latest')
