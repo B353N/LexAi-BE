@@ -22,36 +22,35 @@ defineProps({
 <template>
     <Head title="Добре дошли в LexAI" />
 
-    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-        <div
-            class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white"
-        >
-            <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-                    <div class="flex lg:justify-center lg:col-start-2">
-                        <h1 class="text-4xl font-bold text-gray-800 dark:text-white">LexAI</h1>
+    <div class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+        <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-indigo-500 selection:text-white">
+            <div class="relative w-full max-w-4xl px-6 lg:px-8">
+                <header class="flex items-center justify-between py-8">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 00-1 1v1.365l-5.73 5.73a1 1 0 00-.306 1.037l.037.062a1 1 0 001.036.706h12a1 1 0 001.036-.706l.037-.062a1 1 0 00-.306-1.037L11 4.365V3a1 1 0 00-1-1zM2.57 12h14.86l-3.59 3.59a1 1 0 01-1.414 0L10 12.586l-2.293 2.293a1 1 0 01-1.414 0L2.57 12z" clip-rule="evenodd" />
+                        </svg>
+                        <h1 class="ml-3 text-2xl font-bold tracking-wider">LexAI</h1>
                     </div>
-                    <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
+                    <nav v-if="canLogin" class="flex items-center space-x-4">
                         <Link
                             v-if="$page.props.auth.user"
                             :href="route('dashboard')"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                            class="rounded-md bg-indigo-500 px-4 py-2 text-white transition duration-300 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
                         >
                             Табло за управление
                         </Link>
-
                         <template v-else>
                             <Link
                                 :href="route('login')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                class="rounded-md px-4 py-2 text-gray-600 transition duration-300 ease-in-out hover:text-indigo-500 dark:text-gray-400 dark:hover:text-indigo-400"
                             >
                                 Вход
                             </Link>
-
                             <Link
                                 v-if="canRegister"
                                 :href="route('register')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                class="rounded-md border border-indigo-500 px-4 py-2 text-indigo-500 transition duration-300 ease-in-out hover:bg-indigo-500 hover:text-white"
                             >
                                 Регистрация
                             </Link>
@@ -59,26 +58,29 @@ defineProps({
                     </nav>
                 </header>
 
-                <main class="mt-6">
-                    <div class="grid gap-6 lg:grid-cols-1 lg:gap-8">
-                        <div
-                            class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
-                        >
-                            <div class="relative flex w-full flex-col gap-6">
-                                <h2 class="text-xl font-semibold text-black dark:text-white">
-                                    Добре дошли в LexAI
-                                </h2>
-
-                                <p class="text-sm/relaxed text-gray-600 dark:text-gray-400">
-                                    LexAI е автоматизиран правен асистент, предназначен за малки и средни предприятия в България. Нашата платформа използва силата на изкуствения интелект, за да предостави бързи и точни правни консултации, анализи на документи и автоматизация на правни процеси. С LexAI можете да се съсредоточите върху растежа на вашия бизнес, докато ние се грижим за правните въпроси.
-                                </p>
+                <main class="mt-12">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-lg">
+                        <div class="p-8 sm:p-12">
+                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                                Вашият интелигентен правен асистент
+                            </h2>
+                            <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+                                LexAI е иновативна платформа, която предоставя автоматизирани правни услуги за малки и средни предприятия в България. Спестете време и ресурси, като се доверите на нашия AI асистент за правни консултации, анализ на договори и много други.
+                            </p>
+                            <div class="mt-8">
+                                <Link
+                                    :href="route('register')"
+                                    class="inline-block rounded-md bg-indigo-500 px-8 py-3 text-lg font-semibold text-white transition duration-300 ease-in-out hover:bg-indigo-600 transform hover:-translate-y-1"
+                                >
+                                    Започнете безплатно
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </main>
 
-                <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
+                <footer class="py-8 mt-12 text-center text-sm text-gray-500 dark:text-gray-400">
+                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }}) &copy; {{ new Date().getFullYear() }} LexAI. Всички права запазени.
                 </footer>
             </div>
         </div>
