@@ -1,65 +1,86 @@
-<script setup lang="ts">
+<script setup>
 import { Head, Link } from '@inertiajs/vue3';
+
+defineProps({
+    canLogin: {
+        type: Boolean,
+    },
+    canRegister: {
+        type: Boolean,
+    },
+    laravelVersion: {
+        type: String,
+        required: true,
+    },
+    phpVersion: {
+        type: String,
+        required: true,
+    },
+});
 </script>
 
 <template>
     <Head title="Добре дошли в LexAI" />
-    <div class="flex min-h-screen flex-col items-center bg-gray-100 p-6 dark:bg-gray-900">
-        <header class="w-full max-w-5xl">
-            <nav class="flex items-center justify-end gap-4 p-4 text-sm">
-                <Link
-                    v-if="$page.props.auth.user"
-                    :href="route('dashboard')"
-                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                >
-                    Табло за управление
-                </Link>
-                <template v-else>
-                    <Link
-                        :href="route('login')"
-                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    >
-                        Вход
-                    </Link>
-                    <Link
-                        :href="route('register')"
-                        class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    >
-                        Регистрация
-                    </Link>
-                </template>
-            </nav>
-        </header>
 
-        <main class="flex flex-1 flex-col items-center justify-center text-center">
-            <div class="w-full max-w-3xl px-6">
-                <h1 class="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl md:text-6xl">
-                    Добре дошли в LexAI
-                </h1>
-                <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 md:text-xl">
-                    Вашият интелигентен правен асистент. Автоматизирани правни съвети и генериране на документи за малки и средни предприятия в България.
-                </p>
-                <div class="mt-8">
-                    <Link
-                        v-if="!$page.props.auth.user"
-                        :href="route('register')"
-                        class="rounded-md bg-blue-600 px-8 py-3 text-lg font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    >
-                        Започнете сега
-                    </Link>
-                     <Link
-                        v-else
-                        :href="route('dashboard')"
-                        class="rounded-md bg-blue-600 px-8 py-3 text-lg font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    >
-                        Към таблото за управление
-                    </Link>
-                </div>
+    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+        <div
+            class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white"
+        >
+            <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
+                <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
+                    <div class="flex lg:justify-center lg:col-start-2">
+                        <h1 class="text-4xl font-bold text-gray-800 dark:text-white">LexAI</h1>
+                    </div>
+                    <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
+                        <Link
+                            v-if="$page.props.auth.user"
+                            :href="route('dashboard')"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        >
+                            Табло за управление
+                        </Link>
+
+                        <template v-else>
+                            <Link
+                                :href="route('login')"
+                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                            >
+                                Вход
+                            </Link>
+
+                            <Link
+                                v-if="canRegister"
+                                :href="route('register')"
+                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                            >
+                                Регистрация
+                            </Link>
+                        </template>
+                    </nav>
+                </header>
+
+                <main class="mt-6">
+                    <div class="grid gap-6 lg:grid-cols-1 lg:gap-8">
+                        <div
+                            class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
+                        >
+                            <div class="relative flex w-full flex-col gap-6">
+                                <h2 class="text-xl font-semibold text-black dark:text-white">
+                                    Добре дошли в LexAI
+                                </h2>
+
+                                <p class="text-sm/relaxed text-gray-600 dark:text-gray-400">
+                                    LexAI е автоматизиран правен асистент, предназначен за малки и средни предприятия в България. Нашата платформа използва силата на изкуствения интелект, за да предостави бързи и точни правни консултации, анализи на документи и автоматизация на правни процеси. С LexAI можете да се съсредоточите върху растежа на вашия бизнес, докато ние се грижим за правните въпроси.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+                <footer class="py-16 text-center text-sm text-black dark:text-white/70">
+                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
+                </footer>
             </div>
-        </main>
-
-        <footer class="w-full max-w-5xl py-4 text-center text-sm text-gray-500 dark:text-gray-400">
-            © {{ new Date().getFullYear() }} LexAI. Всички права запазени.
-        </footer>
+        </div>
     </div>
-</template>
+</template> 
