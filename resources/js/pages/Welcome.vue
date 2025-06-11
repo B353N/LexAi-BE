@@ -33,13 +33,20 @@ defineProps({
                         <h1 class="ml-3 text-2xl font-bold tracking-wider">LexAI</h1>
                     </div>
                     <nav v-if="canLogin" class="flex items-center space-x-4">
-                        <Link
-                            v-if="$page.props.auth.user"
-                            :href="route('dashboard')"
-                            class="rounded-md bg-indigo-500 px-4 py-2 text-white transition duration-300 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-                        >
-                            Табло за управление
-                        </Link>
+                        <div v-if="$page.props.auth.user" class="flex items-center space-x-4">
+                            <Link
+                                :href="route('dashboard')"
+                                class="rounded-md bg-indigo-500 px-4 py-2 text-white transition duration-300 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                            >
+                                Табло за управление
+                            </Link>
+                            <Link
+                                :href="route('chat')"
+                                class="rounded-md px-4 py-2 text-gray-600 transition duration-300 ease-in-out hover:text-indigo-500 dark:text-gray-400 dark:hover:text-indigo-400"
+                            >
+                                Чат
+                            </Link>
+                        </div>
                         <template v-else>
                             <Link
                                 :href="route('login')"
