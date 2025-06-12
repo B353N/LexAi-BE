@@ -47,8 +47,8 @@ const submit = () => {
 <template>
     <Head title="Чат" />
     <AppLayout>
-        <div class="flex h-full">
-            <!-- Sidebar -->
+        <div class="h-full flex">
+            <!-- Sidebar with Chat Sessions -->
             <div class="w-1/4 bg-gray-50 dark:bg-gray-900/50 p-4 border-r border-gray-200 dark:border-gray-800 flex flex-col">
                 <Link :href="route('chat.store')" method="post" as="button" class="flex items-center justify-center w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 mb-6 transition-colors font-semibold shadow-sm">
                     <PlusCircle class="h-5 w-5 mr-2" />
@@ -73,7 +73,7 @@ const submit = () => {
 
                     <CardContent class="flex-grow p-0">
                         <ScrollArea ref="messageContainer" class="h-full">
-                            <div class="space-y-6 p-6">
+                            <div class="p-6 space-y-6">
                                 <div v-for="message in messages" :key="message.id" class="flex" :class="message.sender === 'user' ? 'justify-end' : 'justify-start'">
                                     <div class="max-w-xl rounded-xl px-4 py-3" :class="message.sender === 'user' ? 'bg-indigo-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-200'">
                                         <p class="text-sm whitespace-pre-wrap">{{ message.message }}</p>
