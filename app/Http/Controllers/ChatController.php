@@ -29,7 +29,12 @@ class ChatController extends Controller
     public function store(Request $request)
     {
         $session = auth()->user()->chatSessions()->create([
-            'title' => 'New Chat', // You can generate a better title
+            'title' => 'New Chat',
+        ]);
+
+        $session->messages()->create([
+            'sender' => 'ai',
+            'message' => 'Здравейте аз съм LexAI и мога да ви помогна със всякакви правни въпроси. Мога да изработвам договори и документи.',
         ]);
 
         return redirect()->route('chat.show', $session);
