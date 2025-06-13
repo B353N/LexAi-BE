@@ -69,7 +69,7 @@ class ChatController extends Controller
         })->all();
 
         $response = Prism::text()
-            ->using(Provider::Gemini, 'gemini-1.5-flash-latest')
+            ->using(Provider::Gemini, 'gemini-2.0-flash')
             ->withMessages($messages)
             ->asText();
 

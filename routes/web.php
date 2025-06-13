@@ -18,7 +18,7 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/chat', [ChatController::class, 'index'])->middleware(['auth', 'verified'])->name('chat.index');
+Route::get('/chat', [ChatController::class, 'index'])->middleware(['auth', 'verified'])->name('chat');
 Route::post('/chat', [ChatController::class, 'store'])->middleware(['auth', 'verified'])->name('chat.store');
 Route::get('/chat/{chatSession}', [ChatController::class, 'show'])->middleware(['auth', 'verified'])->name('chat.show');
 Route::put('/chat/{chatSession}', [ChatController::class, 'update'])->middleware(['auth', 'verified'])->name('chat.update');
