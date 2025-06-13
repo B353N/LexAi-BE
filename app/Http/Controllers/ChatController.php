@@ -30,6 +30,12 @@ class ChatController extends Controller
             'title' => 'New Chat', // You can generate a better title
         ]);
 
+        // Add default AI welcome message
+        $session->messages()->create([
+            'sender' => 'ai',
+            'message' => 'Здравейте, аз съм LexAI и мога да съм вашия правен съветник. Мога да ги помогна с разбирането на закони, да ви консултирам или изработя договори за наем и др.',
+        ]);
+
         return redirect()->route('chat.show', $session);
     }
 
